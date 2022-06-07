@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">OMBDbAPIMovieExample</string>
+    <string name="searchViewHint">Search Movie</string>
+    <string name="mainText">Movie Preview Info</string>
+    <string name="searchHintText">Search Movie</string>
+    <string name="movieAppInfo">"You can search to have information about the movie you want to watch."</string>
+    <string name="errorMessage">Please enter a more descriptive movie name</string>
+    <string name="detailButtonText">Detail</string>
+    <string name="imdb">IMDB :</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
