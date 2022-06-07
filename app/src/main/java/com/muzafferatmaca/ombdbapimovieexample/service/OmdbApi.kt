@@ -18,6 +18,4 @@ interface OmdbApi {
         @Query("q") searchQuery : String,
     ) : Response<List<Search>>
 
-
-
 }
