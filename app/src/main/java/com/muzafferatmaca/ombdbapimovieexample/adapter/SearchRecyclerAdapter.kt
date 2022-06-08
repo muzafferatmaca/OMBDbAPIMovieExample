@@ -4,10 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.muzafferatmaca.ombdbapimovieexample.R
 import com.muzafferatmaca.ombdbapimovieexample.Search
 import com.muzafferatmaca.ombdbapimovieexample.databinding.SearchRowBinding
+import com.muzafferatmaca.ombdbapimovieexample.util.downloadFromUrl
+import com.muzafferatmaca.ombdbapimovieexample.util.placeholderProgressBar
+import com.muzafferatmaca.ombdbapimovieexample.view.SearchMovieFragment
+import com.muzafferatmaca.ombdbapimovieexample.view.SearchMovieFragmentDirections
+import kotlinx.android.synthetic.main.search_row.view.*
 
 
 /**
@@ -30,8 +36,10 @@ class SearchRecyclerAdapter(val searchList : ArrayList<Search>) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.itemBinding.search = searchList[position]
 
+
+        holder.itemBinding.moviePosterImageView.downloadFromUrl(searchList[position].Poster,
+            placeholderProgressBar(holder.itemView.context))
 
     }
 
@@ -40,7 +48,12 @@ class SearchRecyclerAdapter(val searchList : ArrayList<Search>) : RecyclerView.A
     }
 
     override fun onSearchClick(view: View) {
-        TODO("Not yet implemented")
+
+        val imdbID = view.imdbIDTextView.text.toString()
+        val action = SearchMovieFragmentDirections.actionSearchMovieFragmentToDetailMovieFragment(imdbID)
+        Navigation.findNavController(view).navigate(action)
+
+
     }
 }
 

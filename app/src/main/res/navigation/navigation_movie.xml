@@ -17,5 +17,12 @@
         android:id="@+id/detailMovieFragment"
         android:name="com.muzafferatmaca.ombdbapimovieexample.view.DetailMovieFragment"
         android:label="fragment_detail_movie"
-        tools:layout="@layout/fragment_detail_movie" />
+        tools:layout="@layout/fragment_detail_movie" >
+        <action
+            android:id="@+id/action_detailMovieFragment_to_searchMovieFragment"
+            app:destination="@id/searchMovieFragment" />
+        <argument
+            android:name="imdbID"
+            app:argType="string" />
+    </fragment>
 </navigation>

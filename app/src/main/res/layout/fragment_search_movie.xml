@@ -8,6 +8,7 @@
         android:layout_height="match_parent"
         android:background="@color/appBackgroundColor">
 
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
