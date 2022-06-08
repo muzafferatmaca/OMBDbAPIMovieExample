@@ -37,9 +37,8 @@ class SearchRecyclerAdapter(val searchList : ArrayList<Search>) : RecyclerView.A
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
 
-
-        holder.itemBinding.moviePosterImageView.downloadFromUrl(searchList[position].Poster,
-            placeholderProgressBar(holder.itemView.context))
+        holder.itemBinding.search = searchList[position]
+        holder.itemBinding.listener = this
 
     }
 
@@ -54,6 +53,13 @@ class SearchRecyclerAdapter(val searchList : ArrayList<Search>) : RecyclerView.A
         Navigation.findNavController(view).navigate(action)
 
 
+    }
+
+    fun updateSearchMovieList(newSearchList: List<Search>) {
+
+        searchList.clear()
+        searchList.addAll(newSearchList)
+        notifyDataSetChanged()
     }
 }
 

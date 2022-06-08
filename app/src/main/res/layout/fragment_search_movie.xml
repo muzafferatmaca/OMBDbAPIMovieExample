@@ -47,20 +47,30 @@
             app:layout_constraintTop_toBottomOf="@id/searchView" />
 
         <TextView
-            android:id="@+id/infoTextView"
+            android:id="@+id/errorTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:fontFamily="@font/roboto_thin"
             android:gravity="center"
-            android:text="@string/movieAppInfo"
+            android:text="@string/errorMessage"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchView" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:id="@+id/movieProgressBar"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchView"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

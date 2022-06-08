@@ -15,7 +15,7 @@ interface OmdbApi {
     @GET("?")
      suspend fun searchMovie(
         @Query("api_key") api_Key : String = apiKey,
-        @Query("q") searchQuery : String,
+        @Query("q") searchQuery : String = "game",
     ) : Response<List<Search>>
 
 }
