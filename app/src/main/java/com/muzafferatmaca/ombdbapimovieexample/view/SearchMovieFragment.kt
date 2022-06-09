@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.muzafferatmaca.ombdbapimovieexample.R
 import com.muzafferatmaca.ombdbapimovieexample.adapter.SearchRecyclerAdapter
 import com.muzafferatmaca.ombdbapimovieexample.databinding.FragmentSearchMovieBinding
+import com.muzafferatmaca.ombdbapimovieexample.util.hideSoftKeyboard
 import com.muzafferatmaca.ombdbapimovieexample.viewmodel.SearchFeedViewModel
 import kotlinx.android.synthetic.main.fragment_search_movie.*
 
@@ -33,8 +34,7 @@ class SearchMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_search_movie, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_movie, container, false)
         return binding.root
     }
 
@@ -42,21 +42,6 @@ class SearchMovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(SearchFeedViewModel::class.java)
-
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-
-                if (query != null) {
-                    viewModel.searchMovie(query)
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return true
-            }
-
-        })
 
         recyclerView.layoutManager = GridLayoutManager(context, 3)
         recyclerView.adapter = searchMovieAdapter
@@ -67,12 +52,39 @@ class SearchMovieFragment : Fragment() {
 
     private fun observeLiveData() {
 
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                if (query != null) {
+
+                    viewModel.getDataFromAPI(query)
+
+                } else {
+
+                    viewModel.movieLoading.value = false
+                    binding.errorTextView.setText(R.string.movieAppInfo)
+                    viewModel.movieError.value=true
+                }
+
+                hideSoftKeyboard(this@SearchMovieFragment)
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
+
         viewModel.searchMovie.observe(viewLifecycleOwner) { searchMovie ->
 
             searchMovie.search?.let {
 
                 recyclerView.visibility = View.VISIBLE
                 searchMovieAdapter.searchList = it
+                searchMovieAdapter.notifyDataSetChanged()
 
             }
 
@@ -83,6 +95,7 @@ class SearchMovieFragment : Fragment() {
 
             error?.let {
 
+                println(it)
 
                 if (it) {
                     errorTextView.setText(R.string.errorMessage)

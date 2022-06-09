@@ -6,14 +6,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.muzafferatmaca.ombdbapimovieexample.R
 import com.muzafferatmaca.ombdbapimovieexample.Search
 import com.muzafferatmaca.ombdbapimovieexample.databinding.SearchRowBinding
-import com.muzafferatmaca.ombdbapimovieexample.model.SearchModel
-import com.muzafferatmaca.ombdbapimovieexample.util.downloadFromUrl
-import com.muzafferatmaca.ombdbapimovieexample.util.placeholderProgressBar
-import com.muzafferatmaca.ombdbapimovieexample.view.SearchMovieFragment
 import com.muzafferatmaca.ombdbapimovieexample.view.SearchMovieFragmentDirections
 import kotlinx.android.synthetic.main.search_row.view.*
 
@@ -23,11 +18,8 @@ import kotlinx.android.synthetic.main.search_row.view.*
  */
 class SearchRecyclerAdapter(var searchList : List<Search>) : RecyclerView.Adapter<SearchRecyclerAdapter.SearchViewHolder>(),SearchClickListener {
 
-    class SearchViewHolder(val itemBinding: SearchRowBinding ) : RecyclerView.ViewHolder(itemBinding.root) {
+    class SearchViewHolder(val itemBinding: SearchRowBinding ) : RecyclerView.ViewHolder(itemBinding.root)
 
-
-
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
 
@@ -56,6 +48,8 @@ class SearchRecyclerAdapter(var searchList : List<Search>) : RecyclerView.Adapte
 
 
     }
+
+
 
 
 }

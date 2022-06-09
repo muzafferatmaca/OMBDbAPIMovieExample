@@ -20,23 +20,16 @@ class DetailMovieViewModel(application: Application) : BaseViewModel(application
     val detailError = MutableLiveData<Boolean>()
     val detailLoading = MutableLiveData<Boolean>()
 
-    fun detailMovie(){
-
-        getDataFromSearch()
-
-    }
-
-    private fun getDataFromSearch(){
+    fun getDataFromSearch(imdbID : String){
 
         detailLoading.value = true
         disposable.add(
-            omdbApiService.getDetail("tt0944947")
+            omdbApiService.getDetail(imdbID)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<DetailModel>(){
                     override fun onSuccess(t: DetailModel) {
 
-                        println(t)
                        detailMovie.value = t
                         detailError.value=false
                         detailLoading.value=false

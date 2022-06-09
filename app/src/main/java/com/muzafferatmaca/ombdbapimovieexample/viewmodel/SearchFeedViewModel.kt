@@ -1,6 +1,9 @@
 package com.muzafferatmaca.ombdbapimovieexample.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import com.muzafferatmaca.ombdbapimovieexample.Search
 import com.muzafferatmaca.ombdbapimovieexample.model.SearchModel
@@ -21,12 +24,7 @@ class SearchFeedViewModel(application: Application) : BaseViewModel(application)
     val movieError = MutableLiveData<Boolean>()
     val movieLoading = MutableLiveData<Boolean>()
 
-    fun searchMovie(searchQuery: String) {
-
-        getDataFromAPI(searchQuery)
-    }
-
-    private fun getDataFromAPI(searchQuery : String) {
+    fun getDataFromAPI(searchQuery: String) {
 
         movieLoading.value = true
 
@@ -37,9 +35,17 @@ class SearchFeedViewModel(application: Application) : BaseViewModel(application)
                 .subscribeWith(object : DisposableSingleObserver<SearchModel>() {
                     override fun onSuccess(t: SearchModel) {
 
-                        searchMovie.value = t
-                        movieError.value = false
-                        movieLoading.value = false
+                        if (t.response.equals("True")) {
+
+                            searchMovie.value = t
+                            movieError.value = false
+                            movieLoading.value = false
+
+                        } else {
+
+                            movieError.value = true
+
+                        }
 
                     }
 
@@ -54,6 +60,13 @@ class SearchFeedViewModel(application: Application) : BaseViewModel(application)
         )
 
 
+    }
+
+
+    override fun onCleared() {
+        super.onCleared()
+
+        disposable.clear()
     }
 
 }

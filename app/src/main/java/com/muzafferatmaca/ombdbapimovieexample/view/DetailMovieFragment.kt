@@ -16,7 +16,8 @@ class DetailMovieFragment : Fragment() {
 
 
     private lateinit var binding: FragmentDetailMovieBinding
-    private lateinit var viewModel : DetailMovieViewModel
+    private lateinit var viewModel: DetailMovieViewModel
+    private lateinit var imdbID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +37,18 @@ class DetailMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        arguments?.let {
+            imdbID = DetailMovieFragmentArgs.fromBundle(it).imdbID
+        }
         viewModel = ViewModelProvider(this).get(DetailMovieViewModel::class.java)
-        viewModel.detailMovie()
+        viewModel.getDataFromSearch(imdbID)
         observeLiveData()
 
     }
 
-    fun observeLiveData(){
+    fun observeLiveData() {
 
-        viewModel.detailMovie.observe(viewLifecycleOwner){detailMovie ->
+        viewModel.detailMovie.observe(viewLifecycleOwner) { detailMovie ->
 
             detailMovie?.let {
                 binding.detail = it
