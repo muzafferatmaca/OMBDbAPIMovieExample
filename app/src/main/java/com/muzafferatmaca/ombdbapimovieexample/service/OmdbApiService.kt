@@ -1,10 +1,10 @@
 package com.muzafferatmaca.ombdbapimovieexample.service
 
 import com.muzafferatmaca.ombdbapimovieexample.Search
+import com.muzafferatmaca.ombdbapimovieexample.model.SearchModel
 import com.muzafferatmaca.ombdbapimovieexample.util.Util.apiKey
 import com.muzafferatmaca.ombdbapimovieexample.util.Util.baseUrl
 import io.reactivex.Single
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -22,9 +22,11 @@ class OmdbApiService {
         .create(OmdbApi::class.java)
 
 
-    suspend fun getData(searchQuery: String) : Response<List<Search>>{
+    fun getData(): Single<SearchModel> {
+   // fun getData(searchQuery: String): Single<List<SearchModel>> {
 
-        return api.searchMovie(apiKey,searchQuery)
+       // return api.searchMovie(apiKey, searchQuery)
+        return api.searchMovie()
 
     }
 

@@ -60,7 +60,7 @@ class SearchMovieFragment : Fragment() {
             searchMovie?.let {
 
                 recyclerView.visibility = View.VISIBLE
-                searchMovieAdapter.updateSearchMovieList(searchMovie)
+                searchMovieAdapter.searchList
 
             }
 

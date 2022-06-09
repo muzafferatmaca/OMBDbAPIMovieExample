@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.muzafferatmaca.ombdbapimovieexample.R
 import com.muzafferatmaca.ombdbapimovieexample.Search
 import com.muzafferatmaca.ombdbapimovieexample.databinding.SearchRowBinding
+import com.muzafferatmaca.ombdbapimovieexample.model.SearchModel
 import com.muzafferatmaca.ombdbapimovieexample.util.downloadFromUrl
 import com.muzafferatmaca.ombdbapimovieexample.util.placeholderProgressBar
 import com.muzafferatmaca.ombdbapimovieexample.view.SearchMovieFragment
@@ -55,11 +56,6 @@ class SearchRecyclerAdapter(val searchList : ArrayList<Search>) : RecyclerView.A
 
     }
 
-    fun updateSearchMovieList(newSearchList: List<Search>) {
 
-        searchList.clear()
-        searchList.addAll(newSearchList)
-        notifyDataSetChanged()
-    }
 }
 
