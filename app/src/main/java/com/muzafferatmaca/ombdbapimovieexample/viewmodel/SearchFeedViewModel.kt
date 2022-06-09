@@ -31,7 +31,7 @@ class SearchFeedViewModel(application: Application) : BaseViewModel(application)
         movieLoading.value = true
 
         disposable.add(
-            omdbApiService.getData()
+            omdbApiService.getData("game")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<SearchModel>() {
@@ -41,16 +41,12 @@ class SearchFeedViewModel(application: Application) : BaseViewModel(application)
                         movieError.value = false
                         movieLoading.value = false
 
-                        println("test ${t}")
-
                     }
 
                     override fun onError(e: Throwable) {
                         movieLoading.value = false
                         movieError.value = true
                         e.printStackTrace()
-
-                        println("test ${e}")
                     }
 
                 }

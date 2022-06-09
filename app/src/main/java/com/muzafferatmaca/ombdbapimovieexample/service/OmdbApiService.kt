@@ -22,12 +22,9 @@ class OmdbApiService {
         .create(OmdbApi::class.java)
 
 
-    fun getData(): Single<SearchModel> {
-   // fun getData(searchQuery: String): Single<List<SearchModel>> {
+   fun getData(searchQuery: String): Single<SearchModel> {
 
-       // return api.searchMovie(apiKey, searchQuery)
-        return api.searchMovie()
-
+        return api.searchMovie(apiKey, searchQuery)
     }
 
 

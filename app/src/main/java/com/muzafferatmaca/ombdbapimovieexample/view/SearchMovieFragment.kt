@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.muzafferatmaca.ombdbapimovieexample.R
+import com.muzafferatmaca.ombdbapimovieexample.Search
 import com.muzafferatmaca.ombdbapimovieexample.adapter.SearchRecyclerAdapter
 import com.muzafferatmaca.ombdbapimovieexample.databinding.FragmentSearchMovieBinding
 import com.muzafferatmaca.ombdbapimovieexample.viewmodel.SearchFeedViewModel
@@ -35,8 +36,7 @@ class SearchMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_search_movie, container, false)
+        binding =DataBindingUtil.inflate(inflater, R.layout.fragment_search_movie, container, false)
         return binding.root
     }
 
@@ -46,7 +46,7 @@ class SearchMovieFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SearchFeedViewModel::class.java)
         viewModel.searchMovie()
 
-        recyclerView.layoutManager = GridLayoutManager(context, 3)
+        recyclerView.layoutManager = GridLayoutManager(context,3)
         recyclerView.adapter = searchMovieAdapter
 
         observeLiveData()
@@ -57,10 +57,10 @@ class SearchMovieFragment : Fragment() {
 
         viewModel.searchMovie.observe(viewLifecycleOwner) { searchMovie ->
 
-            searchMovie?.let {
+            searchMovie.search?.let {
 
                 recyclerView.visibility = View.VISIBLE
-                searchMovieAdapter.searchList
+                searchMovieAdapter.searchList = it
 
             }
 
@@ -70,6 +70,7 @@ class SearchMovieFragment : Fragment() {
         viewModel.movieError.observe(viewLifecycleOwner) { error ->
 
             error?.let {
+
 
                 if (it) {
                     errorTextView.visibility = View.VISIBLE

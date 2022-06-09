@@ -12,12 +12,9 @@ import retrofit2.http.Query
  */
 interface OmdbApi {
 
-    @GET("?s=game&apikey=38b0bbaa")
+    @GET("?")
     fun searchMovie(
-       /* @Query("s") searchQuery: String,
-        @Query("apikey") api_Key: String = apiKey
-
-        */
+       @Query("apikey") api_Key: String = apiKey,
+       @Query("s") searchQuery: String
     ): Single<SearchModel>
-
 }

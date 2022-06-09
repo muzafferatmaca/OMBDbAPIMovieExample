@@ -9,8 +9,8 @@ import com.muzafferatmaca.ombdbapimovieexample.Search
  */
 data class SearchModel(
 
-    @Expose @SerializedName("Search"      ) var search : List<Search>? = null,
-    @Expose @SerializedName("totalResults") var totalResults: String? = null,
-    @Expose @SerializedName("Response"    ) var response: String? = null
+    @SerializedName("Search"      ) var search : List<Search>? = null,
+    @SerializedName("totalResults") var totalResults: String? = null,
+    @SerializedName("Response"    ) var response: String? = null
 
 )

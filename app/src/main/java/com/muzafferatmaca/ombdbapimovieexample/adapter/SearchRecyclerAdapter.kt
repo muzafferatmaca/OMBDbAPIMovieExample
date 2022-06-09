@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.muzafferatmaca.ombdbapimovieexample.R
 import com.muzafferatmaca.ombdbapimovieexample.Search
 import com.muzafferatmaca.ombdbapimovieexample.databinding.SearchRowBinding
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.search_row.view.*
 /**
  * Created by Muzaffer Atmaca on 7.06.2022.
  */
-class SearchRecyclerAdapter(val searchList : ArrayList<Search>) : RecyclerView.Adapter<SearchRecyclerAdapter.SearchViewHolder>(),SearchClickListener {
+class SearchRecyclerAdapter(var searchList : List<Search>) : RecyclerView.Adapter<SearchRecyclerAdapter.SearchViewHolder>(),SearchClickListener {
 
     class SearchViewHolder(val itemBinding: SearchRowBinding ) : RecyclerView.ViewHolder(itemBinding.root) {
 
