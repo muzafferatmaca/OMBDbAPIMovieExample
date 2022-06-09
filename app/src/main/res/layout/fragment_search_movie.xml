@@ -54,7 +54,7 @@
             android:layout_marginEnd="15dp"
             android:fontFamily="@font/roboto_thin"
             android:gravity="center"
-            android:text="@string/errorMessage"
+            android:text="@string/movieAppInfo"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

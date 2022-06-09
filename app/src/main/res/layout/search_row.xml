@@ -16,7 +16,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:onClick="@{listener::onSearchClick}"
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
@@ -26,6 +25,7 @@
             android:layout_margin="3dp"
             app:cardCornerRadius="20dp"
             android:clickable="true"
+            android:onClick="@{listener::onSearchClick}"
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

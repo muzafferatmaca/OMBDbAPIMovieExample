@@ -5,14 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.muzafferatmaca.ombdbapimovieexample.R
-import com.muzafferatmaca.ombdbapimovieexample.Search
 import com.muzafferatmaca.ombdbapimovieexample.adapter.SearchRecyclerAdapter
 import com.muzafferatmaca.ombdbapimovieexample.databinding.FragmentSearchMovieBinding
 import com.muzafferatmaca.ombdbapimovieexample.viewmodel.SearchFeedViewModel
@@ -36,7 +33,8 @@ class SearchMovieFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding =DataBindingUtil.inflate(inflater, R.layout.fragment_search_movie, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_search_movie, container, false)
         return binding.root
     }
 
@@ -44,16 +42,30 @@ class SearchMovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(SearchFeedViewModel::class.java)
-        viewModel.searchMovie()
 
-        recyclerView.layoutManager = GridLayoutManager(context,3)
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                if (query != null) {
+                    viewModel.searchMovie(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
+
+        recyclerView.layoutManager = GridLayoutManager(context, 3)
         recyclerView.adapter = searchMovieAdapter
 
         observeLiveData()
 
     }
 
-    fun observeLiveData() {
+    private fun observeLiveData() {
 
         viewModel.searchMovie.observe(viewLifecycleOwner) { searchMovie ->
 
@@ -73,7 +85,9 @@ class SearchMovieFragment : Fragment() {
 
 
                 if (it) {
+                    errorTextView.setText(R.string.errorMessage)
                     errorTextView.visibility = View.VISIBLE
+                    movieProgressBar.visibility = View.GONE
                 } else {
                     errorTextView.visibility = View.GONE
                 }
@@ -82,15 +96,17 @@ class SearchMovieFragment : Fragment() {
 
         }
 
-        viewModel.movieLoading.observe(viewLifecycleOwner){loading ->
+        viewModel.movieLoading.observe(viewLifecycleOwner) { loading ->
 
             loading?.let {
 
-                if (it){
+                if (it) {
+
                     movieProgressBar.visibility = View.VISIBLE
                     errorTextView.visibility = View.GONE
                     recyclerView.visibility = View.GONE
-                }else{
+
+                } else {
                     movieProgressBar.visibility = View.INVISIBLE
                 }
 
@@ -99,7 +115,7 @@ class SearchMovieFragment : Fragment() {
         }
 
 
-
     }
+
 
 }

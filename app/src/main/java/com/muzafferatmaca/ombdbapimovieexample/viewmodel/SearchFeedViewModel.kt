@@ -21,17 +21,17 @@ class SearchFeedViewModel(application: Application) : BaseViewModel(application)
     val movieError = MutableLiveData<Boolean>()
     val movieLoading = MutableLiveData<Boolean>()
 
-    fun searchMovie() {
+    fun searchMovie(searchQuery: String) {
 
-        getDataFromAPI()
+        getDataFromAPI(searchQuery)
     }
 
-    private fun getDataFromAPI() {
+    private fun getDataFromAPI(searchQuery : String) {
 
         movieLoading.value = true
 
         disposable.add(
-            omdbApiService.getData("game")
+            omdbApiService.getData(searchQuery)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<SearchModel>() {
