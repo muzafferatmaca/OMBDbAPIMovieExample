@@ -11,4 +11,5 @@
     <color name="appBackgroundColor">#191A2C</color>
     <color name="searchButtonColor">#F62683</color>
     <color name="textHintColor">#808080</color>
+    <color name="dividerColor">#808080</color>
 </resources>

@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.muzafferatmaca.ombdbapimovieexample.R
 import com.muzafferatmaca.ombdbapimovieexample.adapter.SearchRecyclerAdapter
 import com.muzafferatmaca.ombdbapimovieexample.databinding.FragmentSearchMovieBinding
@@ -44,11 +47,18 @@ class SearchMovieFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SearchFeedViewModel::class.java)
 
         recyclerView.layoutManager = GridLayoutManager(context, 3)
+        var dividerItemDecoration = DividerItemDecoration(context,RecyclerView.VERTICAL)
+        ResourcesCompat.getDrawable(resources,R.drawable.divider,null)?.let {
+            dividerItemDecoration.setDrawable(it)
+        }
+        recyclerView.addItemDecoration(dividerItemDecoration)
+
         recyclerView.adapter = searchMovieAdapter
 
         observeLiveData()
 
     }
+
 
     private fun observeLiveData() {
 
